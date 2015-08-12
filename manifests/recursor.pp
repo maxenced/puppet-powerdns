@@ -60,6 +60,14 @@ class powerdns::recursor(
     source   => $package_source
   }
 
+  file { $powerdns::params::cfg_include_path :
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
+    require => Package[$package],
+  }
+
   file { $powerdns::params::recursor_cfg_path:
     ensure  => $ensure,
     owner   => root,
